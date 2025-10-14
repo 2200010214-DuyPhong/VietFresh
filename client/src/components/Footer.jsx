@@ -27,23 +27,22 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-16 bg-white text-black">
+    <footer className="py-16 bg-white dark:bg-gray-900 text-black dark:text-gray-100 transition-colors duration-300">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Company Info */}
           <div>
-            <a href="#" className="text-2xl font-bold flex items-center gap-2 text-green-700 mb-4">
-              <Leaf className="text-green-600" size={32} />
+            <a href="#" className="text-2xl font-bold flex items-center gap-2 text-green-700 dark:text-green-400 mb-4">
+              <Leaf className="text-green-600 dark:text-green-400" size={32} />
               <span>Nông Sản Sạch</span>
             </a>
-            <p className="text-gray-900 mb-4">
+            <p className="text-gray-900 dark:text-gray-300 mb-4">
               Cung cấp nông sản hữu cơ chất lượng cao từ năm 2015. An toàn và tươi ngon.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
                 <div
                   key={index}
-                  className="cursor-pointer hover:text-green-600 transition-colors"
+                  className="cursor-pointer hover:text-green-600 dark:hover:text-green-400 transition-colors"
                   title={social.name}
                 >
                   {social.icon}
@@ -51,58 +50,50 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
-          {/* Quick Links */}
           <div>
-            <h5 className="font-semibold uppercase mb-4">Liên Kết</h5>
-            <ul className="space-y-2 text-gray-900">
+            <h5 className="font-semibold uppercase mb-4 dark:text-gray-200">Liên Kết</h5>
+            <ul className="space-y-2 text-gray-900 dark:text-gray-300">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="hover:text-green-600 transition-colors">
+                  <a href={link.href} className="hover:text-green-600 dark:hover:text-green-400 transition-colors">
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Support Links */}
           <div>
-            <h5 className="font-semibold uppercase mb-4">Hỗ Trợ</h5>
-            <ul className="space-y-2 text-gray-900">
+            <h5 className="font-semibold uppercase mb-4 dark:text-gray-200">Hỗ Trợ</h5>
+            <ul className="space-y-2 text-gray-900 dark:text-gray-300">
               {supportLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="hover:text-green-600 transition-colors">
+                  <a href={link.href} className="hover:text-green-600 dark:hover:text-green-400 transition-colors">
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Contact Info */}
           <div>
-            <h5 className="font-semibold uppercase mb-4">Liên Hệ</h5>
-            <p className="text-gray-900 mb-2">
+            <h5 className="font-semibold uppercase mb-4 dark:text-gray-200">Liên Hệ</h5>
+            <p className="text-gray-900 dark:text-gray-300 mb-2">
               Email:{' '}
-              <a href="mailto:info@nongsan.com" className="text-green-600 hover:underline">
+              <a href="mailto:info@nongsan.com" className="text-green-600 dark:text-green-400 hover:underline">
                 contact@nongsan.com
               </a>
             </p>
-            <p className="text-gray-900 mb-4">
+            <p className="text-gray-900 dark:text-gray-300 mb-4">
               Hotline:{' '}
-              <a href="tel:+84978372652" className="text-green-600 hover:underline">
+              <a href="tel:+84978372652" className="text-green-600 dark:text-green-400 hover:underline">
                 0978 372 652
               </a>
             </p>
-            <p className="text-gray-900 text-sm">
+            <p className="text-gray-900 dark:text-gray-400 text-sm">
               📍 331 Đỗ Mười, Phường An Phú Đông, TP.HCM
             </p>
           </div>
         </div>
-
-        {/* Copyright */}
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-900 text-sm">
+        <div className="border-t border-gray-800 dark:border-gray-700 pt-8 text-center text-gray-900 dark:text-gray-300 text-sm">
           <p>© 2025 Nông Sản Sạch. Bản quyền thuộc về chúng tôi</p>
         </div>
       </div>
