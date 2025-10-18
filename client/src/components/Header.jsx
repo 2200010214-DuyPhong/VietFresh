@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, ShoppingCart, Menu, X, Moon, Sun } from 'lucide-react';
+import { Search, User, ShoppingCart, Menu, X, Moon, Sun, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Header = ({ onSearchClick }) => {
@@ -16,6 +16,7 @@ const Header = ({ onSearchClick }) => {
       document.documentElement.classList.remove('dark');
     }
   }, []);
+
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -25,6 +26,7 @@ const Header = ({ onSearchClick }) => {
       localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
+
   return (
     <header className="fixed top-0 w-full bg-white dark:bg-gray-900 shadow-sm z-40 transition-colors duration-300">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -32,7 +34,6 @@ const Header = ({ onSearchClick }) => {
           <img src="/logo.png" alt="Logo" className="inline w-12 h-12 mr-1" />
         </a>
 
-        {/* Menu Desktop */}
         <ul className="hidden lg:flex items-center space-x-8 uppercase text-sm font-medium text-gray-900 dark:text-gray-100">
           <li><a href="#billboard" className="hover:text-red-500 transition-colors">Trang Chủ</a></li>
           <li><a href="#company-services" className="hover:text-red-500 transition-colors">Dịch Vụ</a></li>
@@ -42,26 +43,37 @@ const Header = ({ onSearchClick }) => {
           <li><a href="#latest-blog" className="hover:text-red-500 transition-colors">Tin Tức</a></li>
         </ul>
 
-        {/* Icon */}
         <div className="flex items-center space-x-4 text-gray-900 dark:text-gray-100">
           <button onClick={onSearchClick} className="p-2 hover:text-red-500 transition-colors">
             <Search size={24} />
           </button>
+
           <button
             onClick={() => navigate('/login')}
-            className="hover:text-red-500 transition-colors" >
+            className="hover:text-red-500 transition-colors"
+            aria-label="Login"
+          >
             <User size={20} />
           </button>
+
+          <button
+            onClick={() => navigate('/admin')}
+            className="hover:text-red-500 transition-colors"
+            aria-label="Admin Page"
+          >
+            <Shield size={20} />
+          </button>
+
           <button className="hover:text-red-500 transition-colors relative">
             <ShoppingCart size={20} />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
           </button>
 
-          {/* Toggle Dark Mode */}
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="p-2 hover:text-red-500 transition-colors"
-            aria-label="Toggle Dark Mode" >
+            aria-label="Toggle Dark Mode"
+          >
             {darkMode ? <Sun size={24} /> : <Moon size={24} />}
           </button>
 
@@ -71,16 +83,20 @@ const Header = ({ onSearchClick }) => {
         </div>
       </nav>
 
-      {/* Menu Mobile */}
       {isMenuOpen && (
         <div className="lg:hidden fixed inset-0 bg-red-50 dark:bg-gray-800 z-50 p-8 transition-colors duration-300">
           <button onClick={() => setIsMenuOpen(false)} className="absolute top-8 right-8 text-gray-900 dark:text-gray-100">
             <X size={24} />
           </button>
           <ul className="space-y-6 mt-16 text-2xl uppercase text-gray-900 dark:text-gray-100">
-            {['Trang Chủ', 'Dịch Vụ', 'Thực Đơn', 'Combo', 'Khuyến Mãi', 'Tin Tức'].map((item, i) => (
+            {['Trang Chủ', 'Dịch Vụ', 'Thực Đơn', 'Combo', 'Khuyến Mãi', 'Tin Tức', 'Admin'].map((item, i) => (
               <li key={i}>
-                <a href="#" onClick={() => setIsMenuOpen(false)}>{item}</a>
+                <a
+                  href={item === 'Admin' ? '/admin' : '#'}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </a>
               </li>
             ))}
           </ul>

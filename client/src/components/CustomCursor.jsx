@@ -5,9 +5,7 @@ export default function CustomCursor() {
   const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
-    const updatePosition = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    };
+    const updatePosition = (e) => setPosition({ x: e.clientX, y: e.clientY });
     const handleMouseOver = (e) => {
       const target = e.target;
       setIsPointer(
@@ -16,24 +14,22 @@ export default function CustomCursor() {
         target.tagName === 'A'
       );
     };
-
     window.addEventListener('mousemove', updatePosition);
     window.addEventListener('mouseover', handleMouseOver);
-
     return () => {
       window.removeEventListener('mousemove', updatePosition);
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
 
- return (
-  <>
-    <div className="fixed pointer-events-none z-[9999]" style={{ left: `${position.x}px`, top: `${position.y}px`, transform: 'translate(-50%, -50%)' }}>
-      <div className={`bg-black rounded-full transition-all duration-200 ease-out ${isPointer ? 'w-7 h-7' : 'w-3 h-3'}`} />
-    </div>
-    <div className="fixed pointer-events-none z-[9999]" style={{ left: `${position.x}px`, top: `${position.y}px`, transform: 'translate(-50%, -50%)', transition: 'all 0.3s ease-out' }}>
-      <div className="w-2.5 h-2.5 bg-black rounded-full opacity-20 transition-all duration-200 ease-out" />
-    </div>
-  </>
-);
+  return (
+    <>
+      <div className="fixed pointer-events-none z-[9999]" style={{ left: `${position.x}px`, top: `${position.y}px`, transform: 'translate(-50%, -50%)' }}>
+        <div className={`bg-black dark:bg-white rounded-full transition-all duration-200 ease-out ${isPointer ? 'w-7 h-7' : 'w-3 h-3'}`} />
+      </div>
+      <div className="fixed pointer-events-none z-[9999]" style={{ left: `${position.x}px`, top: `${position.y}px`, transform: 'translate(-50%, -50%)', transition: 'all 0.3s ease-out' }}>
+        <div className="w-2.5 h-2.5 bg-black dark:bg-white rounded-full opacity-20 transition-all duration-200 ease-out" />
+      </div>
+    </>
+  );
 }

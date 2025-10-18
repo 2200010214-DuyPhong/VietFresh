@@ -32,8 +32,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <a href="#" className="text-2xl font-bold flex items-center gap-2 text-green-700 dark:text-green-400 mb-4">
-              <Leaf className="text-green-600 dark:text-green-400" size={32} />
-              <span>Nông Sản Sạch</span>
+                <img src="/logo.png" alt="Logo" className="inline w-12 h-12 mr-1" />
+              <span>VietFresh</span>
             </a>
             <p className="text-gray-900 dark:text-gray-300 mb-4">
               Cung cấp nông sản hữu cơ chất lượng cao từ năm 2015. An toàn và tươi ngon.
@@ -94,7 +94,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-gray-800 dark:border-gray-700 pt-8 text-center text-gray-900 dark:text-gray-300 text-sm">
-          <p>© 2025 Nông Sản Sạch. Bản quyền thuộc về chúng tôi</p>
+          <p>© 2025 VietFresh. Bản quyền thuộc về chúng tôi</p>
         </div>
       </div>
     </footer>
