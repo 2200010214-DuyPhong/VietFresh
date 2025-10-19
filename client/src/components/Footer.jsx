@@ -79,7 +79,7 @@ const Footer = () => {
             <p className="text-gray-900 dark:text-gray-300 mb-2">
               Email:{' '}
               <a href="mailto:info@nongsan.com" className="text-green-600 dark:text-green-400 hover:underline">
-                contact@nongsan.com
+                VietFresh@.com
               </a>
             </p>
             <p className="text-gray-900 dark:text-gray-300 mb-4">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef , useEffect } from 'react';
 import { Search, X, ChevronLeft, ChevronRight, Shield, Clock, Leaf, Truck } from 'lucide-react';
 import CustomCursor from './CustomCursor';
 import Footer from './Footer';
@@ -29,14 +29,15 @@ const App = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
-
+  const serviceRef = useRef(null);
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
   }, [darkMode]);
 
   return (
     <div className="font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-500">
-      <Header onSearchClick={() => setIsSearchOpen(true)} darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Header onSearchClick={() => setIsSearchOpen(true)} darkMode={darkMode} setDarkMode={setDarkMode}  onScrollToService={() =>
+          serviceRef.current?.scrollIntoView({ behavior: 'smooth' })}/>
       <CustomCursor />
 
       {/* Tìm kiếm */}
@@ -101,20 +102,30 @@ const App = () => {
       `}</style>
 
       {/* Dịch vụ */}
-      <section className="container mx-auto px-4 mt-20 grid grid-cols-1 md:grid-cols-4 gap-6">
-        {[['Cam Kết Chất Lượng', 'Sản phẩm đảm bảo an toàn và tươi sạch.', <Shield />],
+    <section
+        ref={serviceRef}
+        className="container mx-auto px-4 mt-20 grid grid-cols-1 md:grid-cols-4 gap-6 scroll-mt-24"
+      >
+        {[
+          ['Cam Kết Chất Lượng', 'Sản phẩm đảm bảo an toàn và tươi sạch.', <Shield />],
           ['Giao Hàng Nhanh', 'Đảm bảo giao hàng đúng hẹn, đúng giờ.', <Clock />],
           ['100% Tự Nhiên', 'Không hóa chất, không chất bảo quản.', <Leaf />],
-          ['Giao Hàng Tận Nơi', 'Phục vụ giao hàng tận nơi toàn quốc.', <Truck />]]
-          .map(([title, desc, Icon], idx) => (
-            <div key={idx} className="flex gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-              {React.cloneElement(Icon, { size: 32, className: 'text-green-600' })}
-              <div>
-                <h3 className="font-bold text-lg">{title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-300">{desc}</p>
-              </div>
+          ['Giao Hàng Tận Nơi', 'Phục vụ giao hàng tận nơi toàn quốc.', <Truck />],
+        ].map(([title, desc, Icon], idx) => (
+          <div
+            key={idx}
+            className="flex gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow"
+          >
+            {React.cloneElement(Icon, {
+              size: 32,
+              className: 'text-green-600',
+            })}
+            <div>
+              <h3 className="font-bold text-lg">{title}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-300">{desc}</p>
             </div>
-          ))}
+          </div>
+        ))}
       </section>
 
       {/* Nông sản sạch */}

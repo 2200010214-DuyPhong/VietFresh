@@ -19,24 +19,15 @@ export default function ProductManager() {
       setProducts(products.filter((p) => p.id !== id));
     }
   };
-
   const handleEdit = (id) => setEditingId(id);
-
   const handleSave = (id) => {
-    setProducts(
-      products.map((p) => (p.id === id ? { ...p, ...editingFields[id] } : p))
-    );
+    setProducts(products.map((p) => (p.id === id ? { ...p, ...editingFields[id] } : p)));
     setEditingId(null);
     setEditingFields({});
   };
-
   const handleChange = (id, field, value) => {
-    setEditingFields({
-      ...editingFields,
-      [id]: { ...editingFields[id], [field]: value },
-    });
+    setEditingFields({ ...editingFields, [id]: { ...editingFields[id], [field]: value } });
   };
-
   const handleAdd = () => {
     if (!newProduct.name || !newProduct.price || !newProduct.quantity) return;
     const nextId = Math.max(...products.map((p) => p.id)) + 1;
@@ -46,55 +37,17 @@ export default function ProductManager() {
 
   return (
     <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center shadow-md p-4 rounded-xl bg-white">
-        🛒 Quản lý sản phẩm
-      </h1>
+      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center shadow-md p-4 rounded-xl bg-white">🛒 Quản lý sản phẩm</h1>
 
       {/* Thêm sản phẩm */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-white rounded-2xl shadow-md p-6 mb-8"
-      >
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="bg-white rounded-2xl shadow-md p-6 mb-8">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Thêm sản phẩm</h2>
         <div className="flex flex-col md:flex-row gap-3">
-          <input
-            type="text"
-            placeholder="Tên sản phẩm"
-            className="border rounded-xl px-4 py-2 flex-1"
-            value={newProduct.name}
-            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Giá"
-            className="border rounded-xl px-4 py-2 flex-1"
-            value={newProduct.price}
-            onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="Số lượng"
-            className="border rounded-xl px-4 py-2 flex-1"
-            value={newProduct.quantity}
-            onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Mô tả"
-            className="border rounded-xl px-4 py-2 flex-1"
-            value={newProduct.description}
-            onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-          />
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleAdd}
-            className="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition"
-          >
-            Thêm
-          </motion.button>
+          <input type="text" placeholder="Tên sản phẩm" className="border rounded-xl px-4 py-2 flex-1" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} />
+          <input type="text" placeholder="Giá" className="border rounded-xl px-4 py-2 flex-1" value={newProduct.price} onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} />
+          <input type="number" placeholder="Số lượng" className="border rounded-xl px-4 py-2 flex-1" value={newProduct.quantity} onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })} />
+          <input type="text" placeholder="Mô tả" className="border rounded-xl px-4 py-2 flex-1" value={newProduct.description} onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} />
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleAdd} className="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">Thêm</motion.button>
         </div>
       </motion.div>
 
@@ -113,13 +66,7 @@ export default function ProductManager() {
           <tbody>
             <AnimatePresence>
               {products.map((p) => (
-                <motion.tr
-                  key={p.id}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="border-b hover:bg-gray-50 transition"
-                >
+                <motion.tr key={p.id} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="border-b hover:bg-gray-50 transition">
                   <td className="py-2 px-4">{editingId === p.id ? <input type="text" className="border rounded-xl px-2 py-1 w-full" value={editingFields[p.id]?.name || p.name} onChange={(e) => handleChange(p.id, "name", e.target.value)} /> : p.name}</td>
                   <td className="py-2 px-4">{editingId === p.id ? <input type="text" className="border rounded-xl px-2 py-1 w-full" value={editingFields[p.id]?.price || p.price} onChange={(e) => handleChange(p.id, "price", e.target.value)} /> : p.price}</td>
                   <td className="py-2 px-4">{editingId === p.id ? <input type="number" className="border rounded-xl px-2 py-1 w-full" value={editingFields[p.id]?.quantity || p.quantity} onChange={(e) => handleChange(p.id, "quantity", e.target.value)} /> : p.quantity}</td>
@@ -145,13 +92,7 @@ export default function ProductManager() {
       <div className="md:hidden flex flex-col gap-4">
         <AnimatePresence>
           {products.map((p) => (
-            <motion.div
-              key={p.id}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="bg-white rounded-2xl shadow-md p-4 flex flex-col gap-2 border-l-4 border-green-600"
-            >
+            <motion.div key={p.id} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="bg-white rounded-2xl shadow-md p-4 flex flex-col gap-2 border-l-4 border-green-600">
               <div className="flex justify-between items-center">
                 <div className="font-semibold text-black">{editingId === p.id ? <input type="text" className="border rounded-xl px-2 py-1 w-full" value={editingFields[p.id]?.name || p.name} onChange={(e) => handleChange(p.id, "name", e.target.value)} /> : p.name}</div>
                 <div className="flex gap-2 flex-shrink-0">
