@@ -1,20 +1,23 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import ForgotPassword from './components/ForgotPassword'; // Thêm import này
+import Home from './page/Home';
+import Login from './page/Login';
+import Register from './page/Register';
+import ForgotPassword from './page/ForgotPassword'; 
 import AdminLayout from './components/AdminLayout';
 import ProductManager from './components/ProductManager';
 import UserManager from './components/UserManager';
-import AdminDashboard from './components/AdminDashboard';
-import Product from './components/Product';
+import AdminDashboard from './page/AdminDashboard';
+import Product from './page/Product';
 import ProductDetail from './components/ProductDetail';
-import Cart from './components/Cart';
+import Cart from './page/Cart';
+import CustomCursor from './components/CustomCursor';
 
 const App = () => {
   return (
-    <Routes>
+    <>
+<CustomCursor/>
+     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/product" element={<Product />} />
       <Route path="/product/:id" element={<ProductDetail />} />
@@ -27,7 +30,8 @@ const App = () => {
       <Route path="products" element={<ProductManager />} /> 
       <Route path="users" element={<UserManager />} /> 
       </Route>
-    </Routes>
+    </Routes></>
+   
   );
 };
 
