@@ -9,10 +9,11 @@ import ProductManager from './components/ProductManager';
 import UserManager from './components/UserManager';
 import AdminDashboard from './page/AdminDashboard';
 import Product from './page/Product';
-import ProductDetail from './components/ProductDetail';
+import ProductDetail from './page/ProductDetail';
 import Cart from './page/Cart';
 import CustomCursor from './components/CustomCursor';
-
+import News from './page/News';
+import NewsDetail from './page/NewsDetail';
 const App = () => {
   return (
     <>
@@ -25,6 +26,9 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} /> 
+      <Route path="/news" element={<News/>}/>
+      <Route path="/news/:id"element={<NewsDetail/>}/>
+
       <Route path="/admin" element={<AdminLayout />}>
       <Route index element={<AdminDashboard />} /> 
       <Route path="products" element={<ProductManager />} /> 

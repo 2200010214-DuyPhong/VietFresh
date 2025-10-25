@@ -2,28 +2,27 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
+const newsRoutes = require('./routes/newsRoutes'); // ✅ đã đúng
 const cors = require('cors');
+const path = require('path');
 
 dotenv.config();
 connectDB();
 
 const app = express();
 
-// CORS middleware nên đặt trước các route
 app.use(cors({
-  origin: 'http://localhost:3001', // hoặc 'http://localhost:3000' nếu client chạy trên 3000
+  origin: 'http://localhost:3000',
   credentials: true
 }));
 
-// Middleware để debug
-app.use('/api/products', (req, res, next) => {
-  next();
-}, productRoutes);
+app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, '../client/public/images')));
 
-// Hoặc chỉ cần 1 dòng này cũng được
-// app.use('/api/products', productRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/news', newsRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });
